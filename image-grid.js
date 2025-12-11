@@ -38,7 +38,7 @@
   }
 
 function onLoad(img) {
-  img.classList.add('loaded);
+  img.classList.add('loaded');
 console.log(img.naturalWidth);
 }
 

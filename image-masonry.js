@@ -6,8 +6,11 @@
   const columncount = 3; // or replace with how many columns you want
   const columns = [];
 
-  const container = document.getElementById('imageMasonry');
+  const main = document.querySelect('main');
 
+  const container = document.createElement('div');
+  container.classList.add('masonry');
+  main.appendChild(container);
   
 
   Array.from({ length: columncount }).forEach(col => {

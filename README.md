@@ -17,6 +17,8 @@ It is designed for bearblog however it might work on other providers or a self h
 
 For bearblog however, implementation is quite simple. Just copy and paste the below script into your post or page where you want the masonry grid to be, and replace OWNER, REPO and FOLDER with your github details. By default the script has 3 columns of images but you can change that if you want. 
 
-  <script src="https://cdn.jsdelivr.net/gh/IAMME543/masonry-grid---bearblog-plugin@main/image-masonry.js" data-owner="OWNER" data-repo="REPO" data-folder="FOLDER" data-columns="3"></script>
+> <script src="https://cdn.jsdelivr.net/gh/IAMME543/masonry-grid---bearblog-plugin@main/image-masonry.js" data-owner="OWNER" data-repo="REPO" data-folder="FOLDER" data-columns="3"></script>
+
+  
 
 If anything doesnt work then email me: mirabito.mason@gmail.com

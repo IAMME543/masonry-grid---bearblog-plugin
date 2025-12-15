@@ -1,9 +1,9 @@
 
-  const owner = "IAMME543"; // replace with your GitHub username
-  const repo = "photography"; // replace with repo name
-  const folder = "firstroll"; // replace with folder containing images
+  const owner = script.dataset.owner;
+  const repo = script.dataset.repo;
+  const folder = script.dataset.folder;
 
-  const columncount = 3; // or replace with how many columns you want
+  const columncount = script.dataset.columns;
   const columns = [];
 
   const main = document.querySelector('main');

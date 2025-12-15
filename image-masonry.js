@@ -1,3 +1,4 @@
+  const script = document.currentScript;
 
   const owner = script.dataset.owner;
   const repo = script.dataset.repo;

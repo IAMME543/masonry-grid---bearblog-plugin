@@ -1,4 +1,6 @@
-  const style = document.createElement('style');
+  const totalImages = 100;
+
+const style = document.createElement('style');
   style.textContent=`.masonry {
   display: flex;
   flex-direction: row;
@@ -48,7 +50,7 @@
     container.appendChild(column);
   });
 
-  async function fetchImages() {
+  /* async function fetchImages() {
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
     
     try {
@@ -59,7 +61,15 @@
       // filter for image files
       const urls = data
         .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
-        .map(file => file.download_url);
+        .map(file => file.download_url);  */
+
+      const urls = [];
+
+      for(let i = 0; i < totalImages; i++) {
+        let w = Math.floor(Math.random() * 1000));
+        let h = Math.floor(Math.random() * 1000));
+        urls.push(`https://picsum.photos/${w}/${h}`);
+      }
 
 
       // split url array into columns

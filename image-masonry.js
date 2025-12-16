@@ -49,27 +49,32 @@
   });
 
   async function fetchImages() {
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
+    const apiUrl = `https://cdn.jsdelivr.net/gh/${owner}@main/${repo}/contents/${folder}`;
     
     try {
       const res = await fetch(apiUrl);
       const data = await res.json();
 
       
-
       // filter for image files
       const urls = data
         .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
         .map(file => file.download_url);
 
+      const jsDelivrUrls = urls.map(url => {
+          return url
+            .replace("https://raw.githubusercontent.com/", "https://cdn.jsdelivr.net/gh/")
+            .replace("/main/", "@main/");
+      });
+
       // split url array into columns
-      const columnlength = Math.ceil(urls.length / columncount);
+      const columnlength = Math.ceil(jsDelivrUrls.length / columncount);
       for (let i = 0; i < columncount; i++) {
         const start = i * columnlength;
         const end = start + columnlength;
 
         // inject images
-        urls.slice(start, end).forEach(url => {
+        jsDelivrUrls.slice(start, end).forEach(url => {
           const img = document.createElement('img');
           img.src = url;
           img.loading = 'lazy'; // native lazy loading

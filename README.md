@@ -17,37 +17,37 @@ It is designed for bearblog however it might work on other providers or a self h
 
 For bearblog however, implementation is quite simple. Just copy and paste the below script into your post or page where you want the masonry grid to be, and replace OWNER, REPO and FOLDER with your github details. By default the script has 3 columns of images but you can change that if you want. 
 
-  <script src="https://cdn.jsdelivr.net/gh/IAMME543/masonry-grid---bearblog-plugin@main/image-masonry.js" data-owner="OWNER" data-repo="REPO" data-folder="FOLDER" data-columns="3"></script>
+    <script src="https://cdn.jsdelivr.net/gh/IAMME543/masonry-grid---bearblog-plugin@main/image-masonry.js" data-owner="OWNER" data-repo="REPO" data-folder="FOLDER" data-columns="3"></script>
 
 # CSS VERY IMPORTANT
 
 If you don't setup the css right then you will end up witha single long column of every image taking up the full height of the viewport, because that is the default image formatting on bearblog.
 
-  /* Masonry */
-
-  .masonry {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  }
-
-  .masonry img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    transition: opacity 0.3s ease-in-out;
-    opacity: 0;
-  }
-
-  .masonry img.loaded {
-    opacity: 1;
-  }
-
-  .column {
+    /* Masonry */
+  
+    .masonry {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
-}
+    }
+  
+    .masonry img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+  
+    .masonry img.loaded {
+      opacity: 1;
+    }
+  
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
 
 If anything doesnt work then email me: mirabito.mason@gmail.com

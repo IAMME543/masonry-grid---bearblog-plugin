@@ -1,3 +1,30 @@
+  const style = document.createElement('style');
+  style.textcontent="  .masonry {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  }
+
+  .masonry img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+
+  .masonry img.loaded {
+    opacity: 1;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}";
+  document.head.appendChild(style);
+
   const script = document.currentScript;
 
   const owner = script.dataset.owner;

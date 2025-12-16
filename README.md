@@ -19,37 +19,6 @@ For bearblog however, implementation is quite simple. Just copy and paste the be
 
     <script src="https://cdn.jsdelivr.net/gh/IAMME543/masonry-grid---bearblog-plugin@main/image-masonry.js" data-owner="OWNER" data-repo="REPO" data-folder="FOLDER" data-columns="3"></script>
 
-# CSS VERY IMPORTANT
 
-If you don't setup the css right then you will end up witha single long column of every image taking up the full height of the viewport, because that is the default image formatting on bearblog.
-
-I have this in my bearblog theme, it doesnt mess with anything outside of the masonry plugin. 
-
-    /* Masonry */
-  
-    .masonry {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    }
-  
-    .masonry img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      transition: opacity 0.3s ease-in-out;
-      opacity: 0;
-    }
-  
-    .masonry img.loaded {
-      opacity: 1;
-    }
-  
-    .column {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      }
 
 If anything doesnt work then email me: mirabito.mason@gmail.com

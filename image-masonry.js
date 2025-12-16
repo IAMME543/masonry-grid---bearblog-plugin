@@ -97,4 +97,4 @@ const style = document.createElement('style');
   } 
 
 
-  fetchImages();
+//  fetchImages();

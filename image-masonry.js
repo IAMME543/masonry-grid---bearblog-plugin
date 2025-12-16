@@ -49,7 +49,7 @@
   });
 
   async function fetchImages() {
-    const apiUrl = `https://cdn.jsdelivr.net/gh/${owner}@main/${repo}/contents/${folder}`;
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
     
     try {
       const res = await fetch(apiUrl);

@@ -23,6 +23,8 @@ For bearblog however, implementation is quite simple. Just copy and paste the be
 
 If you don't setup the css right then you will end up witha single long column of every image taking up the full height of the viewport, because that is the default image formatting on bearblog.
 
+I have this in my bearblog theme, it doesnt mess with anything outside of the masonry plugin. 
+
     /* Masonry */
   
     .masonry {
@@ -48,6 +50,6 @@ If you don't setup the css right then you will end up witha single long column o
       display: flex;
       flex-direction: column;
       gap: 10px;
-  }
+      }
 
 If anything doesnt work then email me: mirabito.mason@gmail.com

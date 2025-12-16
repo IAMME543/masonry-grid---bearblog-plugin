@@ -93,8 +93,8 @@ const style = document.createElement('style');
     } catch (err) {
       console.error("Error fetching images:", err);
       container.innerHTML = "<p>Failed to load images.</p>";
-    } 
-  } */
+    } */
+  } 
 
 
   fetchImages();

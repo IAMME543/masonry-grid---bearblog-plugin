@@ -66,8 +66,8 @@ const style = document.createElement('style');
       const urls = [];
 
       for(let i = 0; i < totalImages; i++) {
-        let w = Math.floor(Math.random() * 1000));
-        let h = Math.floor(Math.random() * 1000));
+        let w = Math.floor(Math.random() * 1000);
+        let h = Math.floor(Math.random() * 1000);
         urls.push(`https://picsum.photos/${w}/${h}`);
       }
 

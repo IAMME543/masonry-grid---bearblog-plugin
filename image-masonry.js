@@ -1,5 +1,5 @@
   const style = document.createElement('style');
-  style.textcontent="  .masonry {
+  style.textContent=`.masonry {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-}";
+}`;
   document.head.appendChild(style);
 
   const script = document.currentScript;

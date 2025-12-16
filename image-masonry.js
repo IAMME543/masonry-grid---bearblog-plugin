@@ -89,7 +89,7 @@ const style = document.createElement('style');
           columns[i].appendChild(img);
 
         });
-      }
+      //}
     } catch (err) {
       console.error("Error fetching images:", err);
       container.innerHTML = "<p>Failed to load images.</p>";

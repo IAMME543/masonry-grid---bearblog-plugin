@@ -4,7 +4,7 @@ A very much in development attempt of mine to make myself use bearblog for a pho
 
 <hr>
 
-## How does it work? (currently)
+## How does it work?
 I fetch an array of images from a seperate github repository via the api. I then split this array into columns and display everything in a masonry grid.
 
 ## Why use bearblog and not litteraly anything else?

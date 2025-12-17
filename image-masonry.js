@@ -1,7 +1,7 @@
-(function() {
+(function () {
 
-  const style = document.createElement('style');
-  style.textContent=`.masonry {
+    const style = document.createElement('style');
+    style.textContent = `.masonry {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -25,69 +25,68 @@
     flex-direction: column;
     gap: 10px;
 }`;
-  document.head.appendChild(style);
+    document.head.appendChild(style);
 
-  const script = document.currentScript;
+    const script = document.currentScript;
 
-  const owner = script.dataset.owner;
-  const repo = script.dataset.repo;
-  const folder = script.dataset.folder;
+    const owner = script.dataset.owner;
+    const repo = script.dataset.repo;
+    const folder = script.dataset.folder;
 
-  const columncount = script.dataset.columns;
-  const columns = [];
+    const columncount = script.dataset.columns;
+    const columns = [];
 
-  const main = document.querySelector('main');
+    const main = document.querySelector('main');
 
-  const container = document.createElement('div');
-  container.classList.add('masonry');
-  main.appendChild(container);
-  
+    const container = document.createElement('div');
+    container.classList.add('masonry');
+    main.appendChild(container);
 
-  Array.from({ length: columncount }).forEach(col => {
-    const column = document.createElement('div');
-    column.classList.add('column');
-    columns.push(column);
-    container.appendChild(column);
-  });
+    // create collumn divs
+    Array.from({ length: columncount }).forEach(col => {
+        const column = document.createElement('div');
+        column.classList.add('column');
+        columns.push(column);
+        container.appendChild(column);
+    });
 
-  async function fetchImages() {
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
-    
-    try {
-      const res = await fetch(apiUrl);
-      const data = await res.json();
+    async function fetchImages() {
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
 
-      
-      // filter for image files
-      const urls = data
-        .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
-        .map(file => file.download_url);
+        try {
+            const res = await fetch(apiUrl);
+            const data = await res.json();
 
 
-      // split url array into columns
-      const columnlength = Math.ceil(urls.length / columncount);
-      for (let i = 0; i < columncount; i++) {
-        const start = i * columnlength;
-        const end = start + columnlength;
+            // filter for image files
+            const urls = data
+                .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
+                .map(file => file.download_url);
 
-        // inject images
-        urls.slice(start, end).forEach(url => {
-          const img = document.createElement('img');
-          img.src = url;
-          img.loading = 'lazy'; // native lazy loading
-          img.alt = url; // optional
-          // fade-in effect when image loads
-          img.addEventListener('load', () => img.classList.add('loaded'));
-          columns[i].appendChild(img);
 
-        });
-      }
-    } catch (err) {
-      console.error("Error fetching images:", err);
-      container.innerHTML = "<p>Failed to load images.</p>";
+            // split url array into columns
+            const columnlength = Math.ceil(urls.length / columncount);
+            for (let i = 0; i < columncount; i++) {
+                const start = i * columnlength;
+                const end = start + columnlength;
+
+                // inject images
+                urls.slice(start, end).forEach(url => {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.loading = 'lazy'; 
+                    img.alt = url; 
+                    // fade-in effect when image loads
+                    img.addEventListener('load', () => img.classList.add('loaded'));
+                    columns[i].appendChild(img);
+
+                });
+            }
+        } catch (err) {
+            console.error("Error fetching images:", err);
+            container.innerHTML = "<p>Failed to load images.</p>";
+        }
     }
-  }
 
-
-  fetchImages();
+    fetchImages();
 })();

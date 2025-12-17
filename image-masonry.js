@@ -1,3 +1,5 @@
+(function() {
+
   const style = document.createElement('style');
   style.textContent=`.masonry {
   display: flex;
@@ -88,3 +90,4 @@
 
 
   fetchImages();
+})();

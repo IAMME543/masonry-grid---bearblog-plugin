@@ -1,3 +1,13 @@
+/* 
+    Image masonry plugin for bearblog: to display a collection of images hosted in a github repository in a fake masonry grid
+
+    Put all images in a single folder in your repository and ensure that it is public. 
+
+    Made by Mason. mason.bearblog.dev
+
+*/
+
+
 (function () {
 
     const style = document.createElement('style');

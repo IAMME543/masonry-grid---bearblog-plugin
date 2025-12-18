@@ -43,7 +43,7 @@
     const repo = script.dataset.repo;
     const folder = script.dataset.folder;
 
-    const columncount = script.dataset.columns;
+    const columncount = Number(script.dataset.columns);
     const columns = [];
 
     const main = document.querySelector('main');
@@ -51,6 +51,10 @@
     const container = document.createElement('div');
     container.classList.add('masonry');
     main.appendChild(container);
+
+    if (isNaN(columncount)) {
+        throw new Error("Column count parsing failure. Ensure it is a real number");
+    }
 
     // create collumn divs
     Array.from({ length: columncount }).forEach(col => {
@@ -65,6 +69,10 @@
 
         try {
             const res = await fetch(apiUrl);
+            if (!res.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+
             const data = await res.json();
 
 
@@ -84,8 +92,8 @@
                 urls.slice(start, end).forEach(url => {
                     const img = document.createElement('img');
                     img.src = url;
-                    img.loading = 'lazy'; 
-                    img.alt = url; 
+                    img.loading = 'lazy';
+                    img.alt = url;
                     // fade-in effect when image loads
                     img.addEventListener('load', () => img.classList.add('loaded'));
                     columns[i].appendChild(img);
@@ -93,8 +101,8 @@
                 });
             }
         } catch (err) {
-            console.error("Error fetching images:", err);
             container.innerHTML = "<p>Failed to load images.</p>";
+            throw new Error(`Error fetching images: ${err}`);
         }
     }
 

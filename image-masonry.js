@@ -13,7 +13,8 @@
     const style = document.createElement('style');
     style.textContent = `.masonry {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
   }
@@ -45,7 +46,7 @@
     const folder = script.dataset.folder;
 
     const columncount = Number(script.dataset.columns);
-    const columns = [];
+    let columns = [];
 
     const main = document.querySelector('main');
 
@@ -57,13 +58,13 @@
         throw new Error("Column count parsing failure. Ensure it is a real number");
     }
 
-    // create collumn divs
-    Array.from({ length: columncount }).forEach(col => {
-        const column = document.createElement('div');
-        column.classList.add('column');
-        columns.push(column);
-        container.appendChild(column);
-    });
+    // // create collumn divs
+    // Array.from({ length: columncount }).forEach(col => {
+    //     const column = document.createElement('div');
+    //     column.classList.add('column');
+    //     columns.push(column);
+    //     container.appendChild(column);
+    // });
 
     async function fetchImages() {
         const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
@@ -82,25 +83,27 @@
                 .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
                 .map(file => file.download_url);
 
+            
 
-            // split url array into columns
-            const columnlength = Math.ceil(urls.length / columncount);
-            for (let i = 0; i < columncount; i++) {
-                const start = i * columnlength;
-                const end = start + columnlength;
 
-                // inject images
-                urls.slice(start, end).forEach(url => {
+            // // split url array into columns
+            // const columnlength = Math.ceil(urls.length / columncount);
+            // for (let i = 0; i < columncount; i++) {
+            //     const start = i * columnlength;
+            //     const end = start + columnlength;
+
+            //     // inject images
+                urls.forEach(url => {
                     const img = document.createElement('img');
                     img.src = url;
                     img.loading = 'lazy';
                     img.alt = url;
                     // fade-in effect when image loads
                     img.addEventListener('load', () => img.classList.add('loaded'));
-                    columns[i].appendChild(img);
+                    container.appendChild(img);
 
                 });
-            }
+            // }
         } catch (err) {
             container.innerHTML = "<p>Failed to load images.</p>";
             throw new Error(`Error fetching images: ${err}`);

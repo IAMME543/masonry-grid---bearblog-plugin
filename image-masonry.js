@@ -43,7 +43,7 @@
     flex-direction: column;
     gap: 10px;
 }`;
-
+    document.head.appendChild(style);
     const script = document.currentScript;
 
     const owner = script.dataset.owner;
@@ -89,7 +89,7 @@
                 .map(file => file.download_url);
             
             style.setProperty("--totalImages", urls.length)
-            document.head.appendChild(style);
+
             
             // // split url array into columns
             // const columnlength = Math.ceil(urls.length / columncount);

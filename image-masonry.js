@@ -73,7 +73,7 @@
                 .map(file => file.download_url);
             
             document.documentElement.style.setProperty("--totalImages", urls.length)
-
+            console.log("Total Images: " + urls.length)
                 urls.forEach(url => {
                     const img = document.createElement('img');
                     img.src = url;

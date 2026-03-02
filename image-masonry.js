@@ -11,13 +11,19 @@
 (function () {
 
     const style = document.createElement('style');
-    style.textContent = `.masonry {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  }
+    style.textContent = `
+    :root {
+    --totalImages: 24;
+    }
+
+    .masonry {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-height: calc(var(--totalImages, 24) / 2.5 * 200px);
+    }
 
   .masonry img {
     width: 100%;
@@ -37,7 +43,6 @@
     flex-direction: column;
     gap: 10px;
 }`;
-    document.head.appendChild(style);
 
     const script = document.currentScript;
 
@@ -82,10 +87,10 @@
             const urls = data
                 .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
                 .map(file => file.download_url);
-
             
-
-
+            style.setProperty("--totalImages", urls.length)
+            document.head.appendChild(style);
+            
             // // split url array into columns
             // const columnlength = Math.ceil(urls.length / columncount);
             // for (let i = 0; i < columncount; i++) {

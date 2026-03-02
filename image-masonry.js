@@ -26,7 +26,7 @@
     }
 
   .masonry img {
-    width: 100%;
+    width: 33%;
     height: auto;
     object-fit: contain;
     display: block;

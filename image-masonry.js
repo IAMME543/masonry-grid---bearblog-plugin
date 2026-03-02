@@ -88,7 +88,7 @@
                 .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
                 .map(file => file.download_url);
             
-            style.setProperty("--totalImages", urls.length)
+            document.documentElement.style.setProperty("--totalImages", urls.length)
 
             
             // // split url array into columns

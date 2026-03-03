@@ -1,5 +1,12 @@
 # Image Masonry - bearblog-plugin
 
+
+# DEVELOPMENT NOTES
+grid.js only works as intended in firefox nightly or if you enable the `layout.css.grid-template-masonry-value.enabled` property in about:config.
+
+flex-overflow.js would work if we could estimate the total height of the container to know how many columns will be there. overwise we cant control the amount of columns
+
+
 A very much in development attempt of mine to make myself use bearblog for a photography portfolio by making it easier to mass display images in a nicely spaced grid. 
 
 <hr>

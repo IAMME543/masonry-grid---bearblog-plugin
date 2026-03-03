@@ -21,10 +21,11 @@
     gap: 10px;
     margin-bottom: 20px;
     max-height: calc(var(--totalImages, 24) / 2.5 * 200px);
+    max-width: 33vw;
     }
 
   .masonry img {
-    width: 33%;
+    width: 50%;
     height: auto;
     object-fit: contain;
     display: block;

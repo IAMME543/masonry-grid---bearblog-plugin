@@ -5,104 +5,93 @@
  Author URI: mason.bearblog.dev, github.com/IAMME543
  */
 
-(function () {
-  'use strict';
-  console.log("1")
+  const style = document.createElement('style');
+  style.textContent=`.masonry {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("2")
-    //if (document.body.classList.contains('main')) {
+  .masonry img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+
+  .masonry img.loaded {
+    opacity: 1;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}`;
+  document.head.appendChild(style);
+
+  const script = document.currentScript;
+
+  const owner = script.dataset.owner;
+  const repo = script.dataset.repo;
+  const folder = script.dataset.folder;
+
+  const columncount = script.dataset.columns;
+  const columns = [];
+
+  const main = document.querySelector('main');
+
+  const container = document.createElement('div');
+  container.classList.add('masonry');
+  main.appendChild(container);
+  
+
+  Array.from({ length: columncount }).forEach(col => {
+    const column = document.createElement('div');
+    column.classList.add('column');
+    columns.push(column);
+    container.appendChild(column);
+  });
+
+  async function fetchImages() {
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
+    
+    try {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+
       
-          const style = document.createElement('style');
-      style.textContent = `.masonry {
-          display: flex;
-          flex-direction: row;
-          gap: 10px;
-          }
-
-          .masonry img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            display: block;
-            transition: opacity 0.3s ease-in-out;
-            opacity: 0;
-          }
-
-          .masonry img.loaded {
-            opacity: 1;
-          }
-
-          .column {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }`;
-      document.head.appendChild(style);
-
-      const script = document.currentScript;
-
-      const owner = script.dataset.owner;
-      const repo = script.dataset.repo;
-      const folder = script.dataset.folder;
-
-      const columnCount = script.dataset.columns;
-      const columns = [];
-
-      const main = document.querySelector('main');
-
-      const container = document.createElement('div');
-      container.classList.add('masonry');
-      main.appendChild(container);
+      // filter for image files
+      const urls = data
+        .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
+        .map(file => file.download_url);
 
 
-      Array.from({ length: columnCount }).forEach(col => {
-        let column = document.createElement('div');
-        column.classList.add('column');
-        columns.push(column);
-        container.appendChild(column);
-      });
+      // split url array into columns
+      const columnlength = Math.ceil(urls.length / columncount);
+      for (let i = 0; i < columncount; i++) {
+        const start = i * columnlength;
+        const end = start + columnlength;
 
-      async function fetchImages() {
-        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${folder}`;
+        // inject images
+        urls.slice(start, end).forEach(url => {
+          const img = document.createElement('img');
+          img.src = url;
+          img.loading = 'lazy'; // native lazy loading
+          img.alt = url; // optional
+          // fade-in effect when image loads
+          img.addEventListener('load', () => img.classList.add('loaded'));
+          columns[i].appendChild(img);
 
-        try {
-          const res = await fetch(apiUrl);
-          const data = await res.json();
+        });
+      }
+    } catch (err) {
+      console.error("Error fetching images:", err);
+      container.innerHTML = "<p>Failed to load images.</p>";
+    }
+  }
 
 
-          // filter for image files
-          const urls = data
-            .filter(file => file.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(file.name))
-            .map(file => file.download_url);
-
-
-          // split url array into columns
-          const columnLength = Math.ceil(urls.length / columnCount);
-          for (let i = 0; i < columnCount; i++) {
-            const start = i * columnLength;
-            const end = start + columnLength;
-
-            // inject images
-            urls.slice(start, end).forEach(url => {
-              const img = document.createElement('img');
-              img.src = url;
-              img.loading = 'lazy'; // native lazy loading
-              img.alt = url; // optional
-              // fade-in effect when image loads
-              img.addEventListener('load', () => img.classList.add('loaded'));
-              columns[i].appendChild(img);
-
-            });
-          }
-        } catch (err) {
-          console.error("Error fetching images:", err);
-          container.innerHTML = "<p>Failed to load images.</p>";
-        }
-      //}
-    };
-
-    fetchImages();
-  })
-});
-
+  fetchImages();

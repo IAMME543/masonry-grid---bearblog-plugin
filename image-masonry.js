@@ -7,9 +7,10 @@
 
 (function () {
   'use strict';
+  console.log("1")
 
   document.addEventListener("DOMContentLoaded", function () {
-    
+    console.log("2")
     //if (document.body.classList.contains('main')) {
       
           const style = document.createElement('style');

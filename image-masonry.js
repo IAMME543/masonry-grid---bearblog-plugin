@@ -10,7 +10,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     
-    if (document.body.classList.contains('main')) {
+    //if (document.body.classList.contains('main')) {
       
           const style = document.createElement('style');
       style.textContent = `.masonry {
@@ -98,7 +98,7 @@
           console.error("Error fetching images:", err);
           container.innerHTML = "<p>Failed to load images.</p>";
         }
-      }
+      //}
     };
 
     fetchImages();

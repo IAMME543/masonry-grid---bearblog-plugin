@@ -6,7 +6,9 @@
  */
 
 /* USAGE
-Change the first 4 values (owner, repo, folder, columnCount) or use data attributes in the src declaration as shown here:
+It is recomended to manually compress images before storing on github as it makes everything load faster and reduces bandwidth usage.
+
+Change the 4 values (owner, repo, folder, columnCount) or use data attributes in the src declaration as shown here:
 
 > <src data-owner="Github username" data-repo="Github repository name" data-folder="Repository folder name" data-columns="3"></src> 
 
@@ -14,7 +16,8 @@ Change the first 4 values (owner, repo, folder, columnCount) or use data attribu
 
 (function () {
     'use strict';
-
+    const script = document.currentScript;
+ 
      // Set as github username
      const owner = script.dataset.owner;
      // Set as the repository containing images
@@ -55,14 +58,10 @@ Change the first 4 values (owner, repo, folder, columnCount) or use data attribu
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 33.333%;
+    width:  ${100 / columnCount}%;
 }`;
 
     document.head.appendChild(style);
-
-    const script = document.currentScript;
-
-
 
     const columns = [];
 

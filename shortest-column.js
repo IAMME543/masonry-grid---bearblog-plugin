@@ -5,9 +5,27 @@
  Author URI: mason.bearblog.dev, github.com/IAMME543
  */
 
+/* USAGE
+It is recomended to manually compress images before storing on github as it makes everything load faster and reduces bandwidth usage.
+
+Change the 4 values (owner, repo, folder, columnCount) or use data attributes in the src declaration as shown here:
+
+> <src data-owner="Github username" data-repo="Github repository name" data-folder="Repository folder name" data-columns="3"></src> 
+
+*/
+
 (function () {
     'use strict';
-
+    const script = document.currentScript;
+ 
+     // Set as github username
+     const owner = script.dataset.owner;
+     // Set as the repository containing images
+     const repo = script.dataset.repo;
+     // Set as folder containing images 
+     const folder = script.dataset.folder;
+     // Set as amount of columns
+     const columnCount = Number(script.dataset.columns);
 
     const main = document.querySelector('main');
 
@@ -40,17 +58,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 33.333%
+    width:  ${100 / columnCount}%;
 }`;
 
     document.head.appendChild(style);
-
-    const script = document.currentScript;
-
-    const owner = script.dataset.owner;
-    const repo = script.dataset.repo;
-    const folder = script.dataset.folder;
-    const columnCount = Number(script.dataset.columns);
 
     const columns = [];
 

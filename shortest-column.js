@@ -7,9 +7,13 @@
 
 (function () {
     'use strict';
+
+
     const main = document.querySelector('main');
 
-    if (!main || !document.body.classList.contains('blog')) { return }
+    if (!main || !isOnBlog()) { 
+        console.log("main does not exist or are not on blog")
+        return }
 
     const style = document.createElement('style');
 
@@ -99,9 +103,9 @@
                     //console.log(columnHeight[0] + ", " + columnHeight[1] + ", " + columnHeight[2])
 
                     columns[shortest].appendChild(img);
-                    columnHeight[shortest] += img.getBoundingClientRect().height;
+                    columnHeight[shortest] += img.naturalHeight;
 
-                    //console.log("url: " + url + " shortest: " + shortest + " height: " + columnHeight[shortest])
+                    console.log("url: " + url + " shortest: " + shortest + " height: " + columnHeight[shortest])
 
                     img.classList.add('loaded');
 
@@ -114,10 +118,16 @@
 
             console.error("Error fetching images:", err);
             container.innerHTML = "<p>Failed to load images.</p>";
-
         }
-
     }
+    function isOnBlog() {
+        if (document.body.classList.contains('home') || 
+        document.body.classList.contains('blog') || 
+        document.body.classList.contains('post') || 
+        document.body.classList.contains('page')) {
+            return true;
+        }
+    } 
 
 
     addEventListener("DOMContentLoaded", (event) => fetchImages())

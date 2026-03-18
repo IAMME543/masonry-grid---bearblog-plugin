@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 33.333%
 }`;
 
     document.head.appendChild(style);
@@ -103,9 +104,9 @@
                     //console.log(columnHeight[0] + ", " + columnHeight[1] + ", " + columnHeight[2])
 
                     columns[shortest].appendChild(img);
-                    columnHeight[shortest] += img.getBoundingClientRect().height;
+                    columnHeight[shortest] += img.naturalHeight;
 
-                    //console.log("url: " + url + " shortest: " + shortest + " height: " + columnHeight[shortest])
+                    console.log("url: " + url + " shortest: " + shortest + " height: " + columnHeight[shortest])
 
                     img.classList.add('loaded');
 

@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 33.333%
 }`;
 
     document.head.appendChild(style);

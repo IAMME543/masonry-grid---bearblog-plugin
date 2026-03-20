@@ -40,6 +40,7 @@ Change the 4 values (owner, repo, folder, columnCount) or use data attributes in
   display: flex;
   flex-direction: row;
   gap: 10px;
+  align-items: flex-start;
   }
   .masonry img {
     width: 100%;
@@ -64,9 +65,6 @@ Change the 4 values (owner, repo, folder, columnCount) or use data attributes in
     document.head.appendChild(style);
 
     const columns = [];
-
-    let columnHeight = new Array(columnCount).fill(1);
-
 
     const container = document.createElement('div');
 
@@ -110,14 +108,15 @@ Change the 4 values (owner, repo, folder, columnCount) or use data attributes in
                 const img = document.createElement('img');
                 img.addEventListener('load', () => {
 
-                    let shortest = columnHeight.indexOf(Math.min(...columnHeight));
+                    
+                    const heights = columns.map(col => col.getBoundingClientRect().height)
+                    let shortest = heights.indexOf(Math.min(...heights))
 
                     //console.log(columnHeight[0] + ", " + columnHeight[1] + ", " + columnHeight[2])
 
                     columns[shortest].appendChild(img);
-                    columnHeight[shortest] += img.naturalHeight;
 
-                    console.log("url: " + url + " shortest: " + shortest + " height: " + columnHeight[shortest])
+                    //console.log("url: " + url + " shortest: " + shortest + " heights: " + heights)
 
                     img.classList.add('loaded');
 

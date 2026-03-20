@@ -3,6 +3,7 @@
  Description: A simple hacky masonry grid that pulls photos from a github repository
  Author: Mason
  Author URI: mason.bearblog.dev, github.com/IAMME543
+ Browser Support: Requires Firefox 52+ or Chromium 55+ for async/await support 
  */
 
 /* USAGE
